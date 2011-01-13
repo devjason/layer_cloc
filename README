@@ -1,6 +1,7 @@
-======================
 Counting Lines of Code
 ======================
+
+This script executes the CLOC tool to generate counts of lines of code.  It stores the results for individual slices of the source tree in the `report` directory, and emits totals at the end of the run.
 
 Tools
 -----
@@ -11,3 +12,9 @@ cloc
 Execution
 ---------
 ./count
+
+Markdown
+--------
+This file is written in Markdown format, do something like this to see it on the command line:
+
+`markdown README | lynx -stdin`
