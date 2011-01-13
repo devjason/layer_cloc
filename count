@@ -1,0 +1,34 @@
+#!/bin/bash
+# Driver for counting FCE LOC
+
+BASE="$HOME/jsi/fce-trunk/fcw/src/java"
+CLOC="./cloc.pl --ignore-whitespace --skip-uniqueness"
+OUT="report"
+
+# Clean output
+rm $OUT/*
+
+function count {
+	#1 basedir
+	#2 regex match
+	#3 file list
+	if [ -z $4 ]; then
+		CMD="$CLOC $1 --match-f=$2 --counted=$OUT/$3-files --out=$OUT/$3"
+	else
+		CMD="$CLOC $1 --not-match-f=$2 --counted=$OUT/$3-files --out=$OUT/$3"
+	fi
+	echo $CMD
+	$CMD
+	echo
+}
+
+count "$BASE/com/jsi/fullcourt/bean" ".*Wrapper.*" "wrappers"
+count "$BASE/com/jsi/fullcourt/bean" ".*Wrapper.*" "beans" "exclude"
+count "$BASE/com/jsi/fullcourt/fcweb/web/form" ".*" "forms"
+count "$BASE/com/jsi/fullcourt/fcweb/web" ".*ActionInterceptor.*" "action_interceptor"
+
+# Summary
+REPORTS="$OUT/wrappers $OUT/beans $OUT/forms $OUT/action_interceptor"
+CMD="$CLOC --sum-reports $REPORTS"
+$CMD
+
