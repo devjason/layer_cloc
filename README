@@ -8,5 +8,6 @@ cloc
 	- perl module
 	- http://cloc.sourceforge.net/
 
-	
-
+Execution
+---------
+./count
