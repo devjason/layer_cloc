@@ -12,6 +12,7 @@ function count {
 	#1 basedir
 	#2 regex match
 	#3 file list
+	#4 flag for exclusion
 	if [ -z $4 ]; then
 		CMD="$CLOC $1 --match-f=$2 --counted=$OUT/$3-files --out=$OUT/$3"
 	else
